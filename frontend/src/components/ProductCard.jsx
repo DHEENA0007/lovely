@@ -60,9 +60,6 @@ const ProductCard = ({ product }) => {
                         {product.isNewArrival && (
                             <span className="badge badge-new shadow-sm">New</span>
                         )}
-                        {discount > 0 && (
-                            <span className="badge badge-sale shadow-sm">-{discount}%</span>
-                        )}
                     </div>
 
                     {/* Customization Indicators */}
@@ -128,13 +125,18 @@ const ProductCard = ({ product }) => {
                     </div>
 
                     {/* Price */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                         <span className="text-lg font-bold text-gray-900">
                             ₹{product.price?.toLocaleString()}
                         </span>
                         {product.comparePrice > product.price && (
                             <span className="text-sm text-gray-400 line-through">
                                 ₹{product.comparePrice?.toLocaleString()}
+                            </span>
+                        )}
+                        {discount > 0 && (
+                            <span className="ml-2 text-xs font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600">
+                                -{discount}%
                             </span>
                         )}
                     </div>
