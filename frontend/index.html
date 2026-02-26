@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/webp" href="/Lovely-e1744618992869.webp" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Lovely - Handcrafted personalized gifts for every occasion. Add your own text and photos to create something truly special." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>Lovely - Handcrafted Personalized Gifts</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#fefdf8',
+              100: '#fdf9e8',
+              200: '#fbf0c4',
+              300: '#f7e08b',
+              400: '#f0ca4d',
+              500: '#d4a937',
+              600: '#b8922e',
+              700: '#967624',
+              800: '#7a5e1f',
+              900: '#5c4518',
+            },
+            accent: {
+              50: '#fef7ed',
+              100: '#fde9c8',
+              200: '#fbd38d',
+              300: '#f6ad55',
+              400: '#ed8936',
+              500: '#dd6b20',
+              600: '#c05621',
+              700: '#9c4221',
+            },
+            neutral: {
+              50: '#faf9f7',
+              100: '#f3f1ed',
+              200: '#e8e4dc',
+              300: '#9a8e7f',
+              400: '#6d6051',
+              500: '#4a3f33',
+              600: '#362e24',
+              700: '#2a241c',
+              800: '#1e1a14',
+              900: '#12100c',
+            },
+            dark: {
+              bg: '#faf8f4',
+              card: '#ffffff',
+              border: '#e8e4dc',
+              text: '#2a241c',
+              muted: '#6d6051',
+            },
+            aurora: {
+              start: '#c8a24e',
+              mid: '#b8860b',
+              end: '#daa520',
+            },
+            gold: {
+              50: '#fefdf8',
+              100: '#fdf8e8',
+              200: '#f9edca',
+              300: '#f0d890',
+              400: '#e4be5a',
+              500: '#c8a24e',
+              600: '#a88636',
+              700: '#8a6c27',
+              800: '#6e5520',
+              900: '#574318',
+            },
+            cream: {
+              50: '#fefefe',
+              100: '#faf8f4',
+              200: '#f5f0e8',
+              300: '#ede5d8',
+            },
+            success: '#2d9f6f',
+            warning: '#d4a937',
+            error: '#c54040',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'glow': 'glow 3s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 20px rgba(200, 162, 78, 0.1)' },
+              '100%': { boxShadow: '0 0 40px rgba(200, 162, 78, 0.25)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+        .glass {
+          @apply bg-white/80 backdrop-blur-[20px] border border-gold-200/60 shadow-sm;
+        }
+        
+        .glass-dark {
+          @apply bg-cream-100/95 backdrop-blur-[20px] border-b border-gold-200/60;
+        }
+        
+        .gradient-aurora {
+          background: linear-gradient(135deg, #c8a24e 0%, #b8860b 50%, #daa520 100%);
+        }
+        
+        .gradient-text {
+          background: linear-gradient(135deg, #8a6c27, #c8a24e, #b8860b);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .text-glow {
+          text-shadow: 0 0 40px rgba(200, 162, 78, 0.3);
+        }
+        
+        .card-glow {
+          box-shadow: 0 10px 40px -10px rgba(200, 162, 78, 0.12);
+        }
+        
+        .card-glow-accent {
+          box-shadow: 0 10px 40px -10px rgba(200, 162, 78, 0.2);
+        }
+      }
+
+      /* Base styles */
+      body {
+        @apply bg-dark-bg text-neutral-700 min-h-screen overflow-x-hidden;
+      }
+
+      /* Warm background orbs */
+      .bg-orb {
+        @apply fixed rounded-full filter blur-[120px] opacity-15 pointer-events-none -z-10;
+      }
+      
+      .bg-orb-1 {
+        @apply w-[600px] h-[600px] -top-[200px] -left-[200px];
+        background: radial-gradient(circle, #f7e08b 0%, #fdf9e8 70%);
+      }
+      
+      .bg-orb-2 {
+        @apply w-[500px] h-[500px] -bottom-[150px] -right-[150px];
+        background: radial-gradient(circle, #fde9c8 0%, #fef7ed 70%);
+      }
+      
+      .bg-orb-3 {
+        @apply w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+        background: radial-gradient(circle, #fbf0c4 0%, #fefdf8 70%);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f5f0e8;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #d4c4a8;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #c8a24e;
+      }
+
+      /* Components */
+      .btn-primary {
+        background: linear-gradient(135deg, #c8a24e 0%, #b8860b 50%, #daa520 100%);
+        @apply text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 border-none cursor-pointer relative overflow-hidden shadow-lg hover:-translate-y-0.5 hover:shadow-xl;
+      }
+
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        transition: left 0.5s;
+      }
+      
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-secondary {
+        @apply bg-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 border cursor-pointer shadow-sm;
+        color: #6d6051;
+        border-color: #e8e4dc;
+      }
+      .btn-secondary:hover {
+        background: #faf8f4;
+        border-color: #d4c4a8;
+        color: #4a3f33;
+      }
+
+      .input-field {
+        @apply bg-white border rounded-xl py-3.5 text-base transition-all duration-300 w-full focus:outline-none shadow-sm;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        color: #2a241c;
+        border-color: #e8e4dc;
+      }
+      .input-field:focus {
+        border-color: #c8a24e;
+        box-shadow: 0 0 0 2px rgba(200, 162, 78, 0.15);
+      }
+      .input-field::placeholder {
+        color: #9a8e7f;
+      }
+
+      .card {
+        @apply bg-white rounded-[20px] overflow-hidden transition-all duration-300;
+        border: 1px solid #ede5d8;
+        box-shadow: 0 4px 24px -4px rgba(42, 36, 28, 0.06);
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px -8px rgba(200, 162, 78, 0.15);
+      }
+
+      .badge {
+        @apply inline-flex items-center px-3 py-1 rounded-[20px] text-xs font-semibold uppercase tracking-wide;
+      }
+      
+      .badge-featured {
+        background: linear-gradient(135deg, #c8a24e, #b8860b);
+        color: #ffffff;
+      }
+      
+      .badge-new {
+        background: linear-gradient(135deg, #2d9f6f, #34d399);
+        color: #ffffff;
+      }
+      
+      .badge-sale {
+        background: linear-gradient(135deg, #c54040, #e05252);
+        color: #ffffff;
+      }
+
+      .checkbox-custom {
+        @apply appearance-none w-5 h-5 border-2 rounded-md bg-white cursor-pointer transition-all duration-300 relative;
+        border-color: #d4c4a8;
+      }
+      .checkbox-custom:checked {
+        background: linear-gradient(135deg, #c8a24e, #b8860b);
+        border-color: transparent;
+      }
+      
+      .checkbox-custom:checked::after {
+        content: '✓';
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold;
+        color: #ffffff;
+      }
+      
+      .toggle-switch {
+        @apply relative w-[52px] h-[28px] rounded-[14px] cursor-pointer transition-all duration-300;
+        background: #e8e4dc;
+      }
+      
+      .toggle-switch.active {
+        background: linear-gradient(135deg, #c8a24e, #b8860b);
+      }
+      
+      .toggle-switch::after {
+        content: '';
+        @apply absolute top-[3px] left-[3px] w-[22px] h-[22px] bg-white rounded-full transition-all duration-300 shadow-sm;
+      }
+      
+      .toggle-switch.active::after {
+        left: 27px;
+      }
+    </style>
+
+  <!-- Light Gold Theme Text Overrides -->
+  <style>
+    /* Remap .text-white to dark text for light backgrounds */
+    .text-white {
+      color: #2a241c !important;
+    }
+
+    /* Keep actual white text inside gradient/colored containers */
+    .gradient-aurora .text-white,
+    .btn-primary .text-white,
+    .btn-primary,
+    .badge-featured,
+    .badge-new,
+    .badge-sale,
+    [class*='bg-green-'] .text-white,
+    [class*='bg-red-'] .text-white,
+    [class*='bg-blue-'] .text-white,
+    [class*='bg-yellow-'] .text-white,
+    [class*='bg-orange-'] .text-white,
+    [class*='bg-indigo-'] .text-white,
+    [class*='bg-purple-'] .text-white,
+    [class*='bg-pink-'] .text-white,
+    [class*='bg-gold-'] .text-white {
+      color: #ffffff !important;
+    }
+
+    /* Gold gradient link colors */
+    .text-primary-400 {
+      color: #c8a24e !important;
+    }
+
+    .text-primary-300 {
+      color: #e4be5a !important;
+    }
+
+    .hover\:text-primary-300:hover {
+      color: #c8a24e !important;
+    }
+
+    /* Ensure inputs are visible */
+    select option {
+      background: #ffffff;
+      color: #2a241c;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
