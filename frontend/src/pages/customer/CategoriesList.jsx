@@ -23,9 +23,10 @@ const CategoriesList = () => {
 
     if (loading) return <Loading />;
 
-    const standardCategories = categories.filter(c => !c.type || c.type === 'category');
-    const occasionCategories = categories.filter(c => c.type === 'occasion');
-    const recipientCategories = categories.filter(c => c.type === 'recipient');
+    const categoryList = Array.isArray(categories) ? categories : [];
+    const standardCategories = categoryList.filter(c => !c.type || c.type === 'category');
+    const occasionCategories = categoryList.filter(c => c.type === 'occasion');
+    const recipientCategories = categoryList.filter(c => c.type === 'recipient');
 
     const CategorySection = ({ title, items }) => (
         <div className="mb-12">

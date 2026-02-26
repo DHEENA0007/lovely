@@ -59,6 +59,8 @@ router.post('/', protect, admin, uploadProduct.single('image'), async (req, res)
             return res.status(400).json({ message: 'Category already exists' });
         }
 
+        const imageUrl = req.body.image || (req.file ? `/uploads/products/${req.file.filename}` : '');
+
         const category = await Category.create({
             name,
             description,
@@ -66,7 +68,7 @@ router.post('/', protect, admin, uploadProduct.single('image'), async (req, res)
             isActive: isActive !== undefined ? isActive : true,
             displayOrder: displayOrder || 0,
             type: type || 'category',
-            image: req.file ? `/uploads/products/${req.file.filename}` : ''
+            image: imageUrl
         });
 
         res.status(201).json(category);
@@ -90,6 +92,10 @@ router.put('/:id', protect, admin, uploadProduct.single('image'), async (req, re
             category.isActive = req.body.isActive !== undefined ? req.body.isActive : category.isActive;
             category.displayOrder = req.body.displayOrder !== undefined ? req.body.displayOrder : category.displayOrder;
             category.type = req.body.type || category.type;
+
+            if (req.body.image !== undefined) {
+                category.image = req.body.image;
+            }
 
             if (req.file) {
                 category.image = `/uploads/products/${req.file.filename}`;

@@ -9,7 +9,7 @@ const Categories = () => {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
-    const [formData, setFormData] = useState({ name: '', description: '', isActive: true, type: 'category' });
+    const [formData, setFormData] = useState({ name: '', description: '', image: '', isActive: true, type: 'category' });
 
     useEffect(() => {
         fetchCategories();
@@ -32,12 +32,13 @@ const Categories = () => {
             setFormData({
                 name: category.name,
                 description: category.description || '',
+                image: category.image || '',
                 isActive: category.isActive,
                 type: category.type || 'category'
             });
         } else {
             setEditingCategory(null);
-            setFormData({ name: '', description: '', isActive: true, type: 'category' });
+            setFormData({ name: '', description: '', image: '', isActive: true, type: 'category' });
         }
         setShowModal(true);
     };
@@ -53,13 +54,14 @@ const Categories = () => {
             // Let's stick to FormData or JSON. If the backend expects JSON, FormData might be tricky unless handled.
             // Let's assume the API handles JSON if we don't use FormData, OR we append correctly.
 
-            // Wait, previous code used FormData. Let's stick to it.
-            const submitData = {
-                name: formData.name,
-                description: formData.description,
-                isActive: formData.isActive,
-                type: formData.type
-            };
+            const submitData = new FormData();
+            submitData.append('name', formData.name);
+            submitData.append('description', formData.description || '');
+            submitData.append('isActive', formData.isActive);
+            submitData.append('type', formData.type);
+            if (formData.image) {
+                submitData.append('image', formData.image);
+            }
 
             if (editingCategory) {
                 await categoryAPI.update(editingCategory._id, submitData);
@@ -71,7 +73,7 @@ const Categories = () => {
 
             setShowModal(false);
             fetchCategories();
-            setFormData({ name: '', description: '', isActive: true, type: 'category' }); // Reset form
+            setFormData({ name: '', description: '', image: '', isActive: true, type: 'category' }); // Reset form
         } catch (error) {
             console.error('Submit error:', error);
             toast.error(error.response?.data?.message || 'Failed to save category');
@@ -198,6 +200,25 @@ const Categories = () => {
                                     placeholder="e.g. Birthday, For Her, Electronics"
                                     required
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm text-neutral-400 mb-2">Category Image</label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                        if (e.target.files && e.target.files[0]) {
+                                            setFormData({ ...formData, image: e.target.files[0] });
+                                        }
+                                    }}
+                                    className="input-field"
+                                />
+                                {formData.image && typeof formData.image === 'string' && (
+                                    <div className="mt-2 text-xs text-neutral-500 truncate">
+                                        Current: {formData.image}
+                                    </div>
+                                )}
                             </div>
 
                             <div>
